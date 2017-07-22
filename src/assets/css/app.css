@@ -23,7 +23,7 @@ main #search-box {
 }
 
 .gal {
-  margin-top: 40px;
+  margin: 40px 0;
   -webkit-column-count: 3; /* Chrome, Safari, Opera */
   -moz-column-count: 3; /* Firefox */
   column-count: 3;
@@ -55,11 +55,6 @@ main #search-box {
   display: none;
 }
 
-@media (max-width: 1200px){
-  .gal .image-info{
-    display: none;
-  }
-}
 .gal .image-title{
   font-family: "ProximaNova-semibold", arial, sans-serif;
   font-size: 18px;
@@ -72,6 +67,12 @@ main #search-box {
 
 .gal,.gal img {
   width: 100%;
+}
+
+@media (max-width: 1200px){
+  .gal .image-info{
+    display: none;
+  }
 }
 
 @media (max-width: 500px) {
