@@ -1,8 +1,23 @@
-<div>
-  <span><input type="text" #tag placeholder="Search Flickr" (keyup)="searchTagWithDelay(tag.value)"></span>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <span><input id="search-box" type="text" #tag placeholder="Search Flickr" (keyup)="searchTagWithDelay($event, tag.value)"></span>
+  </div>
 </div>
 
-<div>{{feedContentModel.title}}</div>
-<div *ngFor="let item of feedContentModel.items">
-  <img src="{{item.thumbnail}}"/>
+<div class="row gal">
+  <div class="image-block"  *ngFor="let item of feedContentModel.items" target="_blank">
+    <div>
+      <a href="{{item.link}}">
+        <img src="{{item.thumbnail}}" alt="{{item.title}}"/>
+      </a>
+    </div>
+    <div class="image-info">
+      <div class="image-tag">
+        <p>{{item.title}}</p>
+      </div>
+      <div class="image-author">
+        <p>{{item.author}}</p>
+      </div>
+    </div>
+  </div>
 </div>

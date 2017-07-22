@@ -11,12 +11,16 @@ import {ItemModel} from "../../model/item-model";
 })
 export class TagSearchComponent {
   feedContentModel : FeedContentModel = new FeedContentModel();
-
+  private currentTagValue : string = "";
   constructor(private router: Router, private tagSearchService: TagSearchService) {
   }
 
-  searchTagWithDelay(tag: string){
-    setTimeout(this.searchTag(tag), 500);
+  searchTagWithDelay(event,tag: string){
+    tag = tag.trim();
+    if(tag && tag != '' && this.currentTagValue != tag){
+      setTimeout(this.searchTag(tag), 500);
+      this.currentTagValue = tag;
+    }
   }
 
   searchTag(tag: string) {
