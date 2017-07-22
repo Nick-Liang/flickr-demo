@@ -15,7 +15,7 @@ export class TagSearchService {
     query = query || '';
     let url = `https://api.flickr.com/services/feeds/photos_public.gne`;
     return this.jsonp
-      .get(url + "?jsoncallback=JSONP_CALLBACK&format=json&tag=" + query)
+      .get(url + "?jsoncallback=JSONP_CALLBACK&format=json&tags=" + query)
       .map(data => data.json());
 
   }

@@ -3,6 +3,7 @@
  */
 export class ItemModel{
     title : string;
+    tags: string;
     thumbnail: string;
     link : string;
     author : string;

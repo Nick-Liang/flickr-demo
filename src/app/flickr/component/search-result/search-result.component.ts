@@ -36,9 +36,10 @@ export class TagSearchComponent {
         for(var i = 0; i < data.items.length; i++){
           var item = new ItemModel();
           item.title = data.items[i].title;
+          item.tags = data.items[i].tags;
           item.thumbnail = data.items[i].media.m;
           item.link = data.items[i].link;
-          item.author = data.items[i].author;
+          item.author = data.items[i].author.replace("nobody@flickr.com ","").replace('("',"").replace('")',"");
           items.push(item);
         }
         self.feedContentModel.items = items;
