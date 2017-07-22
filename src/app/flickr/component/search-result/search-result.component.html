@@ -1,0 +1,8 @@
+<div>
+  <span><input type="text" #tag placeholder="Search Flickr" (keyup)="searchTagWithDelay(tag.value)"></span>
+</div>
+
+<div>{{feedContentModel.title}}</div>
+<div *ngFor="let item of feedContentModel.items">
+  <img src="{{item.thumbnail}}"/>
+</div>
