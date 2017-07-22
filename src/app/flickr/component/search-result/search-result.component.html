@@ -1,10 +1,16 @@
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
+<div class="jumbotron">
+  <h3 class="title">
+    Flickr Demo
+  </h3>
+  <div class="">
     <span><input id="search-box" type="text" #tag placeholder="Search Flickr" (keyup)="searchTagWithDelay($event, tag.value)"></span>
   </div>
+  <footer>
+    Nick Liang © 2017
+  </footer>
 </div>
 
-<div class="row gal">
+<div class="gal">
   <div class="image-block"  *ngFor="let item of feedContentModel.items">
     <div>
       <a href="{{item.link}}" target="_blank">

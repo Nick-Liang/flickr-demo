@@ -17,6 +17,9 @@ main #search-box {
   font-size: 18px;
   font-family: "ProximaNova-semibold", arial, sans-serif;
   outline: none;
+  box-shadow: 0 0px 0.5px 0 #888888;
+  border: 1px solid #ccc;
+  background-image: linear-gradient(to bottom,#eee 15%,#fff 50%);
 }
 
 .gal {
@@ -41,14 +44,19 @@ main #search-box {
   box-shadow: 2px 2px 5px #888888;
   position: relative;
 }
-@media (max-width: 1280px){
+
+.gal .image-info{
+  position: absolute;
+  bottom: 0px;
+  background-color: #000;
+  opacity: 0.75;
+  color: #ffffff;
+  width: 100%;
+  display: none;
+}
+
+@media (max-width: 1200px){
   .gal .image-info{
-    position: absolute;
-    bottom: 0px;
-    background-color: #000;
-    opacity: 0.75;
-    color: #ffffff;
-    width: 100%;
     display: none;
   }
 }
@@ -74,12 +82,6 @@ main #search-box {
   }
 
   .gal .image-info{
-    position: absolute;
-    bottom: 0px;
-    background-color: #000;
-    opacity: 0.75;
-    color: #ffffff;
-    width: 100%;
     display: block;
   }
 }
