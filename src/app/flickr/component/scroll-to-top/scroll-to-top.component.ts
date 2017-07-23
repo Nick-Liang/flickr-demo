@@ -11,7 +11,7 @@ export class ScrollToTopComponent {
   @HostListener("window:scroll", [])
 
   onWindowScroll() {
-    if (this.document.body.scrollTop > 20 || this.document.documentElement.scrollTop > 20) {
+    if (this.document.body.scrollTop > 150 || this.document.documentElement.scrollTop > 150) {
       this.showButton = true;
     } else {
       this.showButton = false;
