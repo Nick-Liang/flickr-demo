@@ -8,11 +8,13 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import {TagSearchService} from "./flickr/service/data.service";
 import {TagSearchComponent} from "./flickr/component/search-result/search-result.component";
+import {ScrollToTopComponent} from "./flickr/component/scroll-to-top/scroll-to-top.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TagSearchComponent
+    TagSearchComponent,
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,
