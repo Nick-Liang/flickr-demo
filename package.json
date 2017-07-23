@@ -4,6 +4,8 @@
   "description": "A simple starter Angular2 project",
   "scripts": {
     "build": "rimraf dist && webpack --progress",
+    "build.prod": "npm run build && browserify -s main dist/main.bundle.js > dist/bundle.js && npm run minify",
+    "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
     "watch": "npm run build -- --watch",
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
     "start": "npm run server"
