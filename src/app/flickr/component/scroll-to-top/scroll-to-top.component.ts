@@ -8,8 +8,8 @@ import {DOCUMENT} from "@angular/platform-browser";
 export class ScrollToTopComponent {
   showButton : boolean = false;
   constructor(@Inject(DOCUMENT) private document: Document) {}
-  @HostListener("window:scroll", [])
 
+  @HostListener("window:scroll", [])
   onWindowScroll() {
     if (this.document.body.scrollTop > 150 || this.document.documentElement.scrollTop > 150) {
       this.showButton = true;
