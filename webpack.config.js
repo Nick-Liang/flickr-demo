@@ -2,11 +2,13 @@ var webpack = require('webpack');
 var path = require('path');
 var webpackMerge = require('webpack-merge');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // Webpack Config
 var webpackConfig = {
   entry: {
     'main': './src/main.browser.ts',
+    'polyfills': './src/polyfills.browser.ts',
+    'vendor': './src/vendor.ts',
   },
 
   output: {
@@ -24,9 +26,17 @@ var webpackConfig = {
       }
     ),
 
+    new ExtractTextPlugin("app.css"),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['main', 'vendor', 'polyfills']
+    }),
+
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
+
+    new webpack.optimize.UglifyJsPlugin()
 
   ],
 
@@ -36,13 +46,20 @@ var webpackConfig = {
       {
         test: /\.ts$/,
         loaders: [
-          'awesome-typescript-loader',
+          {
+            loader: 'awesome-typescript-loader',
+            options: { configFileName: './tsconfig.json' }
+          },
           'angular2-template-loader',
           'angular2-router-loader'
-        ]
+        ],
       },
       { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'] },
-      { test: /\.html$/, loader: 'raw-loader' }
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        loader: 'file-loader?name=assets/[name].[hash].[ext]'
+      },
+      { test: /\.html$/, loader: 'html-loader' }
     ]
   }
 

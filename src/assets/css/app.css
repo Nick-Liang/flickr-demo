@@ -34,8 +34,11 @@ main #search-box {
   padding: 2px;
 }
 
-.gal .image-block:hover .image-info{
+.gal .image-block:hover{
   box-shadow: 0 0 10px 0 #000;
+}
+
+.gal .image-block:hover .image-info{
   display: block;
 }
 
