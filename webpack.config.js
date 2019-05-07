@@ -1,14 +1,15 @@
-var webpack = require('webpack');
 var path = require('path');
+var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 // Webpack Config
 var webpackConfig = {
   entry: {
-    'main': './src/main.browser.ts',
-    'polyfills': './src/polyfills.browser.ts',
-    'vendor': './src/vendor.ts',
+    'main': './src/main.ts',
+    'polyfills': './src/polyfills.ts',
+    'vendor': './src/vendor.ts'
   },
 
   output: {
@@ -17,50 +18,53 @@ var webpackConfig = {
   },
 
   plugins: [
-    new webpack.ContextReplacementPlugin(
-      // The (\\|\/) piece accounts for path separators in *nix and Windows
-      /angular(\\|\/)core(\\|\/)@angular/,
-      path.resolve(__dirname, '../src'),
-      {
-        // your Angular Async Route paths relative to this root directory
-      }
-    ),
+    new CleanWebpackPlugin(),
 
-    new ExtractTextPlugin("app.css"),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['main', 'vendor', 'polyfills']
-    }),
+    //new ExtractTextPlugin("app.css"),
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
 
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.HashedModuleIdsPlugin()
 
   ],
 
   module: {
-    loaders: [
+    rules: [
       // .ts files for TypeScript
       {
         test: /\.ts$/,
         loaders: [
           {
             loader: 'awesome-typescript-loader',
-            options: { configFileName: './tsconfig.json' }
+            options: {configFileName: './tsconfig.json'}
           },
           'angular2-template-loader',
           'angular2-router-loader'
         ],
       },
-      { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'] },
+      {test: /\.css$/, loaders: ['to-string-loader', 'css-loader']},
+      {test: /\.scss$/, loaders: 'sass-loader'},
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
-      { test: /\.html$/, loader: 'html-loader' }
+      {test: /\.html$/, loader: 'html-loader'}
     ]
+  },
+
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
   }
 
 };
@@ -71,19 +75,20 @@ var defaultConfig = {
   devtool: 'source-map',
 
   output: {
-    filename: '[name].bundle.js',
-    sourceMapFilename: '[name].map',
-    chunkFilename: '[id].chunk.js'
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, './dist')
+    // sourceMapFilename: '[name].map'
+    // chunkFilename: '[id].chunk.js'
   },
 
   resolve: {
-    extensions: [ '.ts', '.js' ],
-    modules: [ path.resolve(__dirname, 'node_modules') ]
+    extensions: ['.ts', '.js'],
+    modules: [path.resolve(__dirname, 'node_modules')]
   },
 
   devServer: {
     historyApiFallback: true,
-    watchOptions: { aggregateTimeout: 300, poll: 1000 },
+    watchOptions: {aggregateTimeout: 300, poll: 1000},
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",

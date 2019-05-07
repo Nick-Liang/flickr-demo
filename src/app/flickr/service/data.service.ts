@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Jsonp } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TagSearchService {
@@ -16,8 +16,7 @@ export class TagSearchService {
     let url = `https://api.flickr.com/services/feeds/photos_public.gne`;
     return this.jsonp
       .get(url + "?jsoncallback=JSONP_CALLBACK&format=json&tags=" + query)
-      .map(data => data.json());
-
+      .pipe(map(data => data.json()));
   }
 
 
