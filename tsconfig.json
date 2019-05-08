@@ -2,27 +2,17 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "outDir": "dist",
-    "rootDir": ".",
+    "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": ["es6", "dom"]
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": ["es6", "dom"],
+    "typeRoots": ["node_modules/@types"]
   },
   "exclude": [
-    "node_modules"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true
-  },
-  "angularCompilerOptions": {
-    "debug": false
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+    "node_modules",
+    "src/main.aot.ts"
+  ]
 }

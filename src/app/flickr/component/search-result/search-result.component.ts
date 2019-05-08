@@ -16,7 +16,7 @@ export class TagSearchComponent {
   constructor(private router: Router, private tagSearchService: TagSearchService) {
   }
 
-  searchTagWithDelay(event, tag: string) {
+  searchTagWithDelay(event: any, tag: string) {
     tag = tag.trim();
     if (tag && tag != '' && this.currentTagValue != tag) {
       setTimeout(this.searchTag(tag), 500);
